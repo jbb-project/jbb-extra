@@ -20,7 +20,8 @@ Fields, local variables, or parameter names that are very short are not helpful 
     </description>
     <priority>3</priority>
       <properties>
-          <property name="minimum" type="Integer" value="3" min="1" max="100" description="Number of characters that are required as a minimum for a variable name."/>
+          <!--DEFAULT VALUE: 3 -->
+          <property name="minimum" type="Integer" value="1" min="1" max="100" description="Number of characters that are required as a minimum for a variable name."/>
           <property name="xpath">
               <value>
                   <![CDATA[
@@ -61,7 +62,8 @@ Fields, formal arguments, or local variable names that are too long can make the
     </description>
       <priority>3</priority>
       <properties>
-          <property name="minimum" type="Integer" description="The variable length reporting threshold" min="1" max="100" value="17"/>
+          <!--DEFAULT VALUE: 17 -->
+          <property name="minimum" type="Integer" description="The variable length reporting threshold" min="1" max="100" value="40"/>
           <property name="xpath">
               <value>
                   <![CDATA[
