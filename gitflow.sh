@@ -177,34 +177,34 @@ function fix_versions_for_branch() {
 
     if grep -E '^feature.*$' <<<$RELEASE_VERSION ;
     then
-        regex="^feature\/([-0-9a-zA-Z]+)_([0-9]+\.[0-9]+\.[0-9]+)_.*"
+        regex="^feature\/([-0-9a-zA-Z]+)_([0-9]+\.[0-9]+\.[0-9]+)_(.*)$"
         if [[ $RELEASE_VERSION =~ $regex ]]
         then
             target_version="${BASH_REMATCH[2]}-${BASH_REMATCH[1]}-SNAPSHOT"
             replace_all_poms_project_version $target_version
-            replace_readme_md_links $RELEASE_VERSION $target_version
+            replace_readme_md_links "feature_${BASH_REMATCH[1]}_${BASH_REMATCH[2]}_${BASH_REMATCH[3]}" $target_version
         fi
     fi
 
     if grep -E '^hotfix.*$' <<<$RELEASE_VERSION ;
     then
-        regex="^hotfix\/([0-9]+)_([0-9]+\.[0-9]+\.[0-9]+)_.*"
+        regex="^hotfix\/([0-9]+)_([0-9]+\.[0-9]+\.[0-9]+)_(.*)$"
         if [[ $RELEASE_VERSION =~ $regex ]]
         then
             target_version="${BASH_REMATCH[2]}-FIX-${BASH_REMATCH[1]}-SNAPSHOT"
             replace_all_poms_project_version $target_version
-            replace_readme_md_links $RELEASE_VERSION $target_version
+            replace_readme_md_links "hotfix_${BASH_REMATCH[1]}_${BASH_REMATCH[2]}_${BASH_REMATCH[3]}" $target_version
         fi
     fi
 
     if grep -E '^release.*$' <<<$RELEASE_VERSION ;
     then
-        regex="^release\/([0-9]+\.[0-9]+\.[0-9]+)_.*"
+        regex="^release\/([0-9]+\.[0-9]+\.[0-9]+)_(.*)$"
         if [[ $RELEASE_VERSION =~ $regex ]]
         then
             target_version="${BASH_REMATCH[1]}-RC"
             replace_all_poms_project_version $target_version
-            replace_readme_md_links $RELEASE_VERSION $target_version
+            replace_readme_md_links "release_${BASH_REMATCH[1]}_${BASH_REMATCH[2]}" $target_version
         fi
     fi
 
