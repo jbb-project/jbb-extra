@@ -172,6 +172,7 @@ function fix_versions_for_branch() {
     if grep -E '^develop$' <<<$RELEASE_VERSION ;
     then
         replace_all_poms_project_version "DEV-SNAPSHOT"
+        replace_readme_md_links $RELEASE_VERSION "DEV-SNAPSHOT"
     fi
 
     if grep -E '^feature.*$' <<<$RELEASE_VERSION ;
@@ -181,6 +182,7 @@ function fix_versions_for_branch() {
         then
             target_version="${BASH_REMATCH[2]}-${BASH_REMATCH[1]}-SNAPSHOT"
             replace_all_poms_project_version $target_version
+            replace_readme_md_links $RELEASE_VERSION $target_version
         fi
     fi
 
@@ -191,6 +193,7 @@ function fix_versions_for_branch() {
         then
             target_version="${BASH_REMATCH[2]}-FIX-${BASH_REMATCH[1]}-SNAPSHOT"
             replace_all_poms_project_version $target_version
+            replace_readme_md_links $RELEASE_VERSION $target_version
         fi
     fi
 
@@ -201,6 +204,7 @@ function fix_versions_for_branch() {
         then
             target_version="${BASH_REMATCH[1]}-RC"
             replace_all_poms_project_version $target_version
+            replace_readme_md_links $RELEASE_VERSION $target_version
         fi
     fi
 
@@ -211,6 +215,7 @@ function fix_versions_for_branch() {
         then
             target_version="${BASH_REMATCH[1]}"
             replace_all_poms_project_version $target_version
+            replace_readme_md_links $RELEASE_VERSION $target_version
          else
             echo "ERROR: Incorrect pom version on master branch detected: $pom_version"
             exit 1
