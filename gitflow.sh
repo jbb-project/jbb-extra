@@ -37,6 +37,7 @@ export -f update_version_in_pom
 function update_readme() {
     sed -i  's/job=jBB-build-.*)]/job=jBB-build-'$2')]/g' $1
     sed -i  's/job\/jBB-build-.*\/)/job\/jBB-build-'$2'\/)/g' $1
+    sed -i  's/jbb-parent:[-0-9a-zA-Z.]*)]/jbb-parent:'$3')]/g' $1
     sed -i  's/jbb-parent:.*\&metric/jbb-parent:'$3'\&metric/g' $1
     sed -i  's/jbb-parent\%3A.*)/jbb-parent\%3A'$3')/g' $1
 }
